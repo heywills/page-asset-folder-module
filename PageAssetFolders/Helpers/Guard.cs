@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KenticoCommunty.PageAssetFolders.Helpers
+namespace KenticoCommunity.PageAssetFolders.Helpers
 {
     public static class Guard
     {

@@ -1,17 +1,18 @@
-﻿using System;
-using CMS;
+﻿using CMS;
 using CMS.Core;
 using CMS.DataEngine;
 using CMS.DocumentEngine;
-using KenticoCommunty.PageAssetFolders.Modules;
-using KenticoCommunty.PageAssetFolders.Helpers;
-using KenticoCommunty.PageAssetFolders.Interfaces;
-using KenticoCommunty.PageAssetFolders.Repositories;
-using KenticoCommunty.PageAssetFolders.Services;
+using KenticoCommunity.PageAssetFolders.Factories;
+using KenticoCommunity.PageAssetFolders.Helpers;
+using KenticoCommunity.PageAssetFolders.Interfaces;
+using KenticoCommunity.PageAssetFolders.Modules;
+using KenticoCommunity.PageAssetFolders.Repositories;
+using KenticoCommunity.PageAssetFolders.Services;
+using System;
 
 [assembly: RegisterModule(typeof(AssetFolderModule))]
 
-namespace KenticoCommunty.PageAssetFolders.Modules
+namespace KenticoCommunity.PageAssetFolders.Modules
 {
     /// <summary>
     /// Module for managing the creation and maintenance of page and type-specific
@@ -47,6 +48,7 @@ namespace KenticoCommunty.PageAssetFolders.Modules
             Service.Use<IAssetFolderService, AssetFolderService>();
             Service.Use<IAssetFolderRepository, AssetFolderRepository>();
             Service.Use<IEventLoggingHelper, EventLoggingHelper>();
+            Service.Use<IAssetFolderRegistrationListFactory, ConfiguredAssetFolderRegistrationListFactory>();
         }
 
         /// <summary>
@@ -58,20 +60,10 @@ namespace KenticoCommunty.PageAssetFolders.Modules
             // In a module, we have to use Service.Resolve for the top object of the
             // dependency chain. All others will be constructor injected.
             _assetFolderService = Service.Resolve<IAssetFolderService>();
-            RegisterAssetFolderTypes();
             DocumentEvents.Insert.After += DocumentInsertAfter;
             DocumentEvents.Update.After += DocumentUpdateAfter;
             DocumentEvents.Insert.Before += DocumentInsertBefore;
         }
-
-        /// <summary>
-        /// Add to the list of page types for which to automatically add child folders here.
-        /// </summary>
-        private void RegisterAssetFolderTypes()
-        {
-            _assetFolderService.RegisterAssetFolderType("Chfa.LandingPage", "Chfa.LandingPageAssetsFolder", "Page assets");
-        }
-
 
         /// <summary>
         /// A new page is created. See if it needs a content folder

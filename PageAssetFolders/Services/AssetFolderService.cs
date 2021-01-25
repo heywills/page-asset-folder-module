@@ -2,12 +2,12 @@
 using CMS.Base;
 using System.Collections.Generic;
 using System.Linq;
-using KenticoCommunty.PageAssetFolders.Helpers;
-using KenticoCommunty.PageAssetFolders.Interfaces;
+using KenticoCommunity.PageAssetFolders.Helpers;
+using KenticoCommunity.PageAssetFolders.Interfaces;
 using KenticoCommunity.PageAssetFolders.Models;
 using CMS.DocumentEngine;
 
-namespace KenticoCommunty.PageAssetFolders.Services
+namespace KenticoCommunity.PageAssetFolders.Services
 {
     /// <summary>
     /// Helper class for registering parent type and content folder type relationships. Once the
@@ -20,33 +20,13 @@ namespace KenticoCommunty.PageAssetFolders.Services
     {
         private readonly IAssetFolderRepository _treeNodeRepository;
         private readonly IEventLoggingHelper _eventLoggingHelper;
-        private readonly List<AssetFolderRegistration> _registeredAssetFolderTypes = new List<AssetFolderRegistration>();
+        private readonly List<AssetFolderRegistration> _registeredAssetFolderTypes;
 
-        public AssetFolderService(IAssetFolderRepository simpleTreeNodeRepository, IEventLoggingHelper eventLoggingHelper)
+        public AssetFolderService(IAssetFolderRepository simpleTreeNodeRepository, IEventLoggingHelper eventLoggingHelper, IAssetFolderRegistrationListFactory assetFolderRegistrationListFactory)
         {
             _treeNodeRepository = simpleTreeNodeRepository;
             _eventLoggingHelper = eventLoggingHelper;
-        }
-
-        /// <summary>
-        /// Register a content folder type that should be created under specific a parent type. This component
-        /// will ensure every instance of the parent type (e.g. Article Page) has one instance of
-        /// a child type (e.g. Article Page Folder) under it.
-        /// </summary>
-        /// <param name="parentClassName"></param>
-        /// <param name="childClassName"></param>
-        /// <param name="defaultChildName"></param>
-        public void RegisterAssetFolderType(string parentClassName, string childClassName, string defaultChildName)
-        {
-            Guard.ArgumentNotNullOrEmpty(parentClassName, nameof(parentClassName));
-            Guard.ArgumentNotNullOrEmpty(childClassName, nameof(childClassName));
-            Guard.ArgumentNotNullOrEmpty(defaultChildName, nameof(defaultChildName));
-            var existingRegistration = GetRegistrationByParentClass(parentClassName);
-            if (existingRegistration != null)
-            {
-                throw new ArgumentException("One registration per parent class name is supported.");
-            }
-            _registeredAssetFolderTypes.Add(new AssetFolderRegistration() { ParentClass = parentClassName, ChildClass = childClassName, ChildName = defaultChildName });
+            _registeredAssetFolderTypes = assetFolderRegistrationListFactory.GetAssetFolderRegistrations();
         }
 
         /// <summary>

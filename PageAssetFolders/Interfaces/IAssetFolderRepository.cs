@@ -3,7 +3,7 @@ using CMS.Base;
 using CMS.DataEngine;
 using CMS.DocumentEngine;
 
-namespace KenticoCommunty.PageAssetFolders.Interfaces
+namespace KenticoCommunity.PageAssetFolders.Interfaces
 {
     public interface IAssetFolderRepository
     {

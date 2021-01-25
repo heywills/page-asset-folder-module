@@ -1,10 +1,10 @@
 ﻿using System;
 using CMS;
 using CMS.EventLog;
-using KenticoCommunty.PageAssetFolders.Helpers;
-using KenticoCommunty.PageAssetFolders.Interfaces;
+using KenticoCommunity.PageAssetFolders.Helpers;
+using KenticoCommunity.PageAssetFolders.Interfaces;
 
-namespace KenticoCommunty.PageAssetFolders.Helpers
+namespace KenticoCommunity.PageAssetFolders.Helpers
 {
     public class EventLoggingHelper : IEventLoggingHelper
     {

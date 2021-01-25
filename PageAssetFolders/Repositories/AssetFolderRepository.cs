@@ -1,15 +1,15 @@
 ﻿using CMS.Base;
 using CMS.DocumentEngine;
-using KenticoCommunty.PageAssetFolders.Interfaces;
+using KenticoCommunity.PageAssetFolders.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using CMS;
 using CMS.DataEngine;
 using CMS.Localization;
-using KenticoCommunty.PageAssetFolders.Helpers;
+using KenticoCommunity.PageAssetFolders.Helpers;
 
-namespace KenticoCommunty.PageAssetFolders.Repositories
+namespace KenticoCommunity.PageAssetFolders.Repositories
 {
     public class AssetFolderRepository : IAssetFolderRepository
     {

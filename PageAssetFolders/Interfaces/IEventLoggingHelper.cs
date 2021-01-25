@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KenticoCommunty.PageAssetFolders.Interfaces
+namespace KenticoCommunity.PageAssetFolders.Interfaces
 {
     public interface IEventLoggingHelper
     {
