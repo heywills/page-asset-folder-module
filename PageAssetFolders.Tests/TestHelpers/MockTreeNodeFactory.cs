@@ -1,7 +1,7 @@
 ﻿using CMS.Base;
 using Moq;
 
-namespace KenticoCommunity.PageAssetFolders.Tests.TestHelpers
+namespace Patterson.Content.Kentico.Tests.TestHelpers
 {
     public static class MockTreeNodeFactory
     {

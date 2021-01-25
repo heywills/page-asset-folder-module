@@ -1,20 +1,36 @@
 ﻿using CMS.DocumentEngine;
+using CMS.DataEngine;
 using NUnit.Framework;
 using KenticoCommunity.PageAssetFolders.Interfaces;
 using KenticoCommunity.PageAssetFolders.Repositories;
-using KenticoCommunity.PageAssetFolders.Tests.TestHelpers;
 using System;
+using CMS.Tests;
+using CMS.DocumentEngine.Types.CMS;
+using Tests.DocumentEngine;
 
 namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
 {
     [TestFixture, NonParallelizable]
-    public class AssetFolderRepositoryTests
+    public class AssetFolderRepositoryTests: UnitTests
     {
         private readonly IAssetFolderRepository repository = new AssetFolderRepository();
+
+        [SetUp]
+        public void TestSetup()
+        {
+            DocumentGenerator.RegisterDocumentType<Folder>(Folder.CLASS_NAME);
+            Fake().DocumentType<Folder>(Folder.CLASS_NAME);
+        }
 
         [TestCase(null, "className", "childName")]
         public void AddChildNode_NodeNullCheck(TreeNode parentNode, string className, string childName)
         {
+
+            DocumentGenerator.RegisterDocumentType<Folder>(Folder.CLASS_NAME);
+            Fake().DocumentType<Folder>(Folder.CLASS_NAME);
+
+
+
             Assert.Throws<ArgumentNullException>(delegate
              {
                  this.repository.AddChildNode(parentNode, className, childName);
@@ -25,7 +41,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
          TestCase("className", null)]
         public void AddChildNode_StringNullCheck(string className, string childName)
         {
-            var parentNode = MockTreeNodeFactory.Create("parentClass");
+            var parentNode = CreateFolder();
             Assert.Throws<ArgumentNullException>(delegate
              {
                  this.repository.AddChildNode(parentNode, className, childName);
@@ -36,7 +52,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
          TestCase("className", "")]
         public void AddChildNode_StringEmptyCheck(string className, string childName)
         {
-            var parentNode = MockTreeNodeFactory.Create("parentClass");
+            var parentNode = CreateFolder();
             Assert.Throws<ArgumentException>(delegate
              {
                  this.repository.AddChildNode(parentNode, className, childName);
@@ -55,7 +71,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
         [Test]
         public void GetChildNodesByClass_StringNullCheck()
         {
-            var parentNode = MockTreeNodeFactory.Create("parentClass");
+            var parentNode = CreateFolder();
             Assert.Throws<ArgumentNullException>(delegate
              {
                  this.repository.GetChildNodesByClass(parentNode, null);
@@ -65,7 +81,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
         [Test]
         public void GetChildNodesByClass_StringEmptyCheck()
         {
-            var parentNode = MockTreeNodeFactory.Create("parentClass");
+            var parentNode = CreateFolder();
             Assert.Throws<ArgumentException>(delegate
              {
                  this.repository.GetChildNodesByClass(parentNode, "");
@@ -127,6 +143,16 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
         public void GetNodeByID_Throws_ArgumentNotNull_Exception_When_Empty_SiteCode_Provided()
         {
             Assert.Throws<ArgumentException>(() => this.repository.GetNodeById(0,  string.Empty, "en-us"));
+        }
+
+        private TreeNode CreateFolder()
+        {
+            var folder = TreeNode.New(Folder.CLASS_NAME).With(p =>
+            {
+                p.NodeAlias = "Test Folder";
+                p.DocumentCulture = "en-US";
+            });
+            return folder;
         }
     }
 }
