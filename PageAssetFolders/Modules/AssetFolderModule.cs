@@ -32,9 +32,7 @@ namespace KenticoCommunity.PageAssetFolders.Modules
     {
         private  IAssetFolderService _assetFolderService;
 
-        private const string FeatureContent = "Feature content";
-        private const string PageContent = "Page assets";
-        private const string RecursionKeyPrefix = "BlueModusAssetFolderModule_";
+        private const string RecursionKeyPrefix = "KenticoCommunityAssetFolderModule_";
 
         public AssetFolderModule()
             : base(nameof(Module))
