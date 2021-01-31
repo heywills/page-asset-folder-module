@@ -23,23 +23,17 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
         }
 
         [TestCase(null, "className", "childName")]
-        public void AddChildNode_NodeNullCheck(TreeNode parentNode, string className, string childName)
+        public void AddChildNode_Throws_ArgumentNullException_If_ParentNode_Is_Null(TreeNode parentNode, string className, string childName)
         {
-
-            DocumentGenerator.RegisterDocumentType<Folder>(Folder.CLASS_NAME);
-            Fake().DocumentType<Folder>(Folder.CLASS_NAME);
-
-
-
             Assert.Throws<ArgumentNullException>(delegate
              {
                  this.repository.AddChildNode(parentNode, className, childName);
              });
         }
 
-        [TestCase(null, "childName"),
-         TestCase("className", null)]
-        public void AddChildNode_StringNullCheck(string className, string childName)
+        [TestCase(null, "childName")]
+        [TestCase("className", null)]
+        public void AddChildNode_Throws_ArgumentNullException_If_Parameter_Is_Null(string className, string childName)
         {
             var parentNode = CreateFolder();
             Assert.Throws<ArgumentNullException>(delegate
@@ -48,9 +42,9 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
              });
         }
 
-        [TestCase("", "childName"),
-         TestCase("className", "")]
-        public void AddChildNode_StringEmptyCheck(string className, string childName)
+        [TestCase("", "childName")]
+        [TestCase("className", "")]
+        public void AddChildNode_Throws_ArgumentException_If_Parameter_Is_Empty(string className, string childName)
         {
             var parentNode = CreateFolder();
             Assert.Throws<ArgumentException>(delegate
@@ -60,7 +54,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
         }
 
         [Test]
-        public void GetChildNodesByClass_NodeNullCheck()
+        public void GetChildNodesByClass_Throws_ArgumentNullException_If_ParentNode_Is_Null()
         {
             Assert.Throws<ArgumentNullException>(delegate
              {
@@ -69,7 +63,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
         }
 
         [Test]
-        public void GetChildNodesByClass_StringNullCheck()
+        public void GetChildNodesByClass_Throws_ArgumentNullException_If_ChildClassName_Is_Null()
         {
             var parentNode = CreateFolder();
             Assert.Throws<ArgumentNullException>(delegate
@@ -79,7 +73,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
         }
 
         [Test]
-        public void GetChildNodesByClass_StringEmptyCheck()
+        public void GetChildNodesByClass_Throws_ArgumentException_If_ChildClassName_Is_Empty()
         {
             var parentNode = CreateFolder();
             Assert.Throws<ArgumentException>(delegate
@@ -89,7 +83,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
         }
 
         [Test]
-        public void MoveNodeToTop_NodeNullCheck()
+        public void MoveNodeToTop_Throws_ArgumentNullException_If_TreeNode_Is_Null()
         {
             Assert.Throws<ArgumentNullException>(delegate
              {
@@ -99,7 +93,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
 
 
         [Test]
-        public void GetNodeByAliasPath_StringNullCheck()
+        public void GetNodeByAliasPath_Throws_ArgumentNullException_If_AliasPath_Is_Null()
         {
             Assert.Throws<ArgumentNullException>(delegate
              {
@@ -108,7 +102,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
         }
 
         [Test]
-        public void GetNodeByAliasPath_StringEmptyCheck()
+        public void GetNodeByAliasPath_Throws_ArgumentException_If_AliasPath_Is_Empty()
         {
             Assert.Throws<ArgumentException>(delegate
              {
@@ -116,33 +110,19 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
              });
         }
 
-        [Test]
-        public void GetNodeByID_Throws_ArgumentNotNull_Exception_When_Zero_NodeID_Provided()
+        [TestCase(0, "dental", "en-us")]
+        [TestCase(1, "", "en-us")]
+        [TestCase(1, "dental", "")]
+        public void GetNodeByID_Throws_ArgumentException_If_Invalid_Parameter(int nodeId, string siteCode, string cultureCode)
         {
-            Assert.Throws<ArgumentException>(() => this.repository.GetNodeById(0, "dental", "en-us"));
+            Assert.Throws<ArgumentException>(() => this.repository.GetNodeById(nodeId, siteCode, cultureCode));
         }
 
-        [Test]
-        public void GetNodeByID_Throws_ArgumentNotNull_Exception_When_Null_Culture_Provided()
+        [TestCase(1, null, "en-us")]
+        [TestCase(1, "dental", null)]
+        public void GetNodeByID_Throws_ArgumentNullException_If_Null_Parameter(int nodeId, string siteCode, string cultureCode)
         {
-            Assert.Throws<ArgumentNullException>(() => this.repository.GetNodeById(1, "dental", null));
-        }
-
-        [Test]
-        public void GetNodeByID_Throws_ArgumentNotNull_Exception_When_Empty_Culture_Provided()
-        {
-            Assert.Throws<ArgumentException>(() => this.repository.GetNodeById(0, "dental", string.Empty));
-        }
-        [Test]
-        public void GetNodeByID_Throws_ArgumentNotNull_Exception_When_Null_SiteCode_Provided()
-        {
-            Assert.Throws<ArgumentNullException>(() => this.repository.GetNodeById(1, null, "en-us"));
-        }
-
-        [Test]
-        public void GetNodeByID_Throws_ArgumentNotNull_Exception_When_Empty_SiteCode_Provided()
-        {
-            Assert.Throws<ArgumentException>(() => this.repository.GetNodeById(0,  string.Empty, "en-us"));
+            Assert.Throws<ArgumentNullException>(() => this.repository.GetNodeById(nodeId, siteCode, cultureCode));
         }
 
         private TreeNode CreateFolder()
