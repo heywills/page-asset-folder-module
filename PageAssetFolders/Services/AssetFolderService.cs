@@ -18,13 +18,13 @@ namespace KenticoCommunity.PageAssetFolders.Services
     /// </summary>
     public class AssetFolderService : IAssetFolderService
     {
-        private readonly IAssetFolderRepository _treeNodeRepository;
+        private readonly IAssetFolderRepository _assetFolderRepository;
         private readonly IEventLogService _eventLogService;
         private readonly List<AssetFolderRegistration> _registeredAssetFolderTypes;
 
-        public AssetFolderService(IAssetFolderRepository simpleTreeNodeRepository, IAssetFolderRegistrationListFactory assetFolderRegistrationListFactory, IEventLogService eventLogService)
+        public AssetFolderService(IAssetFolderRepository assetFolderRepository, IAssetFolderRegistrationListFactory assetFolderRegistrationListFactory, IEventLogService eventLogService)
         {
-            _treeNodeRepository = simpleTreeNodeRepository;
+            _assetFolderRepository = assetFolderRepository;
             _eventLogService = eventLogService;
             _registeredAssetFolderTypes = assetFolderRegistrationListFactory.GetAssetFolderRegistrations();
         }
@@ -73,20 +73,20 @@ namespace KenticoCommunity.PageAssetFolders.Services
             Guard.ArgumentNotNullOrEmpty(childName, nameof(childName));
             try
             {
-                using (var transactionScope = _treeNodeRepository.CreateTransactionScope())
+                using (var transactionScope = _assetFolderRepository.CreateTransactionScope())
                 {
 
-                    var matchingChildren = _treeNodeRepository.GetChildNodesByClass(parentNode, childClassName);
+                    var matchingChildren = _assetFolderRepository.GetChildNodesByClass(parentNode, childClassName);
                     if (matchingChildren.Count == 0)
                     {
-                        _treeNodeRepository.AddChildNode(parentNode, childClassName, childName);
+                        _assetFolderRepository.AddChildNode(parentNode, childClassName, childName);
                     }
                     else if (matchingChildren.Count == 1)
                     {
                         var firstNode = matchingChildren.First();
                         if (firstNode.NodeOrder != 1)
                         {
-                            _treeNodeRepository.MoveNodeToTop(firstNode);
+                            _assetFolderRepository.MoveNodeToTop(firstNode);
                         }
                     }
                     else
@@ -119,7 +119,7 @@ namespace KenticoCommunity.PageAssetFolders.Services
         {
             Guard.ArgumentNotNull(parentNode, nameof(parentNode));
             Guard.ArgumentNotNull(newChildNode, nameof(newChildNode));
-            var matchingChildren = _treeNodeRepository.GetChildNodesByClass(parentNode, newChildNode.ClassName);
+            var matchingChildren = _assetFolderRepository.GetChildNodesByClass(parentNode, newChildNode.ClassName);
             if (matchingChildren.Count != 0)
             {
                 return true;

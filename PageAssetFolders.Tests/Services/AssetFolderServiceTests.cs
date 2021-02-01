@@ -1,6 +1,6 @@
 ﻿using CMS.Core;
-using CMS.DocumentEngine;
 using CMS.DataEngine;
+using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.CMS;
 using CMS.Tests;
 using KenticoCommunity.PageAssetFolders.Interfaces;
@@ -94,7 +94,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
         }
 
         /// <summary>
-        /// Test that EnsureDefaultAssetFolder will log a warning if more than one content folder exists.
+        /// Test that EnsureDefaultAssetFolder will log a warning if more than one asset folder exists.
         /// </summary>
         [Test]
         public void EnsureDefaultAssetFolder_TooManyContentFolders()

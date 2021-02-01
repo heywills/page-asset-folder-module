@@ -14,7 +14,7 @@
         /// </summary>
         public string ChildClass { get; set; }
         /// <summary>
-        /// The name to use when creating new content folders.
+        /// The name to use when creating new asset folders.
         /// </summary>
         public string ChildName { get; set; }
     }

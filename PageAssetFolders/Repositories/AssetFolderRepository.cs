@@ -15,7 +15,7 @@ namespace KenticoCommunity.PageAssetFolders.Repositories
     {
         private const string NodeIdName = "NodeID";
         /// <summary>
-        /// Create a new content folder under the provided parent node using the provided childName as the document name
+        /// Create a new asset folder under the provided parent node using the provided childName as the document name
         /// </summary>
         /// <param name="parentNode"></param>
         /// <param name="childClassName"></param>

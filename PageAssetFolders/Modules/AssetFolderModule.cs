@@ -15,10 +15,10 @@ namespace KenticoCommunity.PageAssetFolders.Modules
 {
     /// <summary>
     /// Module for managing the creation and maintenance of page and type-specific
-    /// content folders.  This 
+    /// asset folders.  This 
     /// - prevents authors from having to manually create them
     /// - ensures each page or type only has one root folder
-    /// - ensures the content folder is at the top, and easy to find
+    /// - ensures the asset folder is at the top, and easy to find
     /// </summary>
     /// <remarks>
     ///     IMPORTANT: Add the following to your **web.config**, so that this module doesn't
@@ -62,7 +62,7 @@ namespace KenticoCommunity.PageAssetFolders.Modules
         }
 
         /// <summary>
-        /// A new page is created. See if it needs a content folder
+        /// A new page is created. See if it needs a asset folder
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
