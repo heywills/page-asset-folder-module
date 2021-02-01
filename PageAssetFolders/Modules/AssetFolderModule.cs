@@ -62,7 +62,7 @@ namespace KenticoCommunity.PageAssetFolders.Modules
         }
 
         /// <summary>
-        /// A new page is created. See if it needs a asset folder
+        /// A new page is created. See if it needs an asset folder
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -80,7 +80,7 @@ namespace KenticoCommunity.PageAssetFolders.Modules
         }
 
         /// <summary>
-        /// A page is updated. See if it needs a content folder
+        /// A page is updated. See if it needs an asset folder
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -98,7 +98,7 @@ namespace KenticoCommunity.PageAssetFolders.Modules
         }
 
         /// <summary>
-        /// Before saving a new node, ensure that it isn't a duplicate content folder node
+        /// Before saving a new node, ensure that it isn't a duplicate asset folder node
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

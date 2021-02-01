@@ -10,11 +10,11 @@ using System.Linq;
 namespace KenticoCommunity.PageAssetFolders.Services
 {
     /// <summary>
-    /// Helper class for managing parent type and content folder type relationships. This class can
+    /// Helper class for managing parent type and asset folder type relationships. This class can
     /// be used to check if the class is configured to have an automatic, default asset folder
     /// and automatically enforce the relationship every time its EnsureAssetFolder method is called.
     /// This allows managing the creation and maintenance of page and type-specific
-    /// content folders.
+    /// asset folders.
     /// </summary>
     public class AssetFolderService : IAssetFolderService
     {
@@ -30,8 +30,8 @@ namespace KenticoCommunity.PageAssetFolders.Services
         }
 
         /// <summary>
-        /// Check if there is a content folder class registered for the provided parent node class
-        /// name. If true, ensure the parent node has one child that is of the registered content
+        /// Check if there is a asset folder class registered for the provided parent node class
+        /// name. If true, ensure the parent node has one child that is of the registered asset
         /// folder type.
         /// </summary>
         /// <param name="parentNode"></param>
@@ -54,7 +54,7 @@ namespace KenticoCommunity.PageAssetFolders.Services
         /// For the provided parentNode, ensure a child node with the provided childClassName exists.
         /// If it doesn't exist, create one using the provided childName as the document name.
         /// Ensure the child node is the first child under the parent, so that authors can easily
-        /// find the node's child content.
+        /// find the node's child asset.
         ///
         /// DO NOT allow exceptions to be raised, because we do not want to fail the creation of
         /// a page, just because the automatic creation of a child node fails.
