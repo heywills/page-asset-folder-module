@@ -58,10 +58,8 @@
     <Compile Include="Interfaces\IAssetFolderRegistrationListFactory.cs" />
     <Compile Include="Models\AssetFolderRegistration.cs" />
     <Compile Include="Services\AssetFolderService.cs" />
-    <Compile Include="Helpers\EventLoggingHelper.cs" />
     <Compile Include="Helpers\Guard.cs" />
     <Compile Include="Interfaces\IAssetFolderService.cs" />
-    <Compile Include="Interfaces\IEventLoggingHelper.cs" />
     <Compile Include="Interfaces\IAssetFolderRepository.cs" />
     <Compile Include="Modules\AssetFolderModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,26 +6,28 @@ using KenticoCommunity.PageAssetFolders.Helpers;
 using KenticoCommunity.PageAssetFolders.Interfaces;
 using KenticoCommunity.PageAssetFolders.Models;
 using CMS.DocumentEngine;
+using CMS.Core;
+using CMS.EventLog;
 
 namespace KenticoCommunity.PageAssetFolders.Services
 {
     /// <summary>
-    /// Helper class for registering parent type and content folder type relationships. Once the
-    /// pair of class names are registered. This class can be used to check if the class is registered
+    /// Helper class for managing parent type and content folder type relationships. This class can
+    /// be used to check if the class is configured to have an automatic, default asset folder
     /// and automatically enforce the relationship every time its EnsureAssetFolder method is called.
     /// This allows managing the creation and maintenance of page and type-specific
-    /// content folders, using AssetFolderHelper.
+    /// content folders.
     /// </summary>
     public class AssetFolderService : IAssetFolderService
     {
         private readonly IAssetFolderRepository _treeNodeRepository;
-        private readonly IEventLoggingHelper _eventLoggingHelper;
+        private readonly IEventLogService _eventLogService;
         private readonly List<AssetFolderRegistration> _registeredAssetFolderTypes;
 
-        public AssetFolderService(IAssetFolderRepository simpleTreeNodeRepository, IEventLoggingHelper eventLoggingHelper, IAssetFolderRegistrationListFactory assetFolderRegistrationListFactory)
+        public AssetFolderService(IAssetFolderRepository simpleTreeNodeRepository, IAssetFolderRegistrationListFactory assetFolderRegistrationListFactory, IEventLogService eventLogService)
         {
             _treeNodeRepository = simpleTreeNodeRepository;
-            _eventLoggingHelper = eventLoggingHelper;
+            _eventLogService = eventLogService;
             _registeredAssetFolderTypes = assetFolderRegistrationListFactory.GetAssetFolderRegistrations();
         }
 
@@ -91,15 +93,17 @@ namespace KenticoCommunity.PageAssetFolders.Services
                     }
                     else
                     {
-                        _eventLoggingHelper.LogWarning(nameof(AssetFolderService), "TooManyAssetFolders",
-                                                      $"The page '{parentNode.NodeAliasPath}' should only contain one folder of type '{childClassName}'.)");
+                        _eventLogService.LogEvent("W",
+                                                  nameof(AssetFolderService), 
+                                                  "TooManyAssetFolders",
+                                                  $"The page '{parentNode.NodeAliasPath}' should only contain one folder of type '{childClassName}'.)");
                     }
                     transactionScope.Commit();
                 }
             }
             catch (Exception ex)
             {
-                _eventLoggingHelper.LogException(nameof(AssetFolderService), nameof(EnsureDefaultAssetFolder), ex);
+                _eventLogService.LogException(nameof(AssetFolderService), nameof(EnsureDefaultAssetFolder), ex);
             }
 
         }
