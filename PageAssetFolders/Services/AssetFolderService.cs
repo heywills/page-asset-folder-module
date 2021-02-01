@@ -1,13 +1,11 @@
-﻿using System;
-using CMS.Base;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CMS.Core;
+using CMS.DocumentEngine;
 using KenticoCommunity.PageAssetFolders.Helpers;
 using KenticoCommunity.PageAssetFolders.Interfaces;
 using KenticoCommunity.PageAssetFolders.Models;
-using CMS.DocumentEngine;
-using CMS.Core;
-using CMS.EventLog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KenticoCommunity.PageAssetFolders.Services
 {

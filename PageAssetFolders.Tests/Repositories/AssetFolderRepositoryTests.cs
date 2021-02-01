@@ -1,17 +1,12 @@
-﻿using CMS.DocumentEngine;
-using CMS.DataEngine;
-using NUnit.Framework;
+﻿using CMS.DataEngine;
+using CMS.DocumentEngine;
+using CMS.DocumentEngine.Types.CMS;
+using CMS.Tests;
 using KenticoCommunity.PageAssetFolders.Interfaces;
 using KenticoCommunity.PageAssetFolders.Repositories;
+using NUnit.Framework;
 using System;
-using CMS.Tests;
-using CMS.DocumentEngine.Types.CMS;
 using Tests.DocumentEngine;
-using CMS.SiteProvider;
-using System.Data;
-using CMS.Localization;
-using CMS.Membership;
-using CMS.Base;
 
 namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
 {

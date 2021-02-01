@@ -3,7 +3,6 @@ using CMS.Core;
 using CMS.DataEngine;
 using CMS.DocumentEngine;
 using KenticoCommunity.PageAssetFolders.Factories;
-using KenticoCommunity.PageAssetFolders.Helpers;
 using KenticoCommunity.PageAssetFolders.Interfaces;
 using KenticoCommunity.PageAssetFolders.Modules;
 using KenticoCommunity.PageAssetFolders.Repositories;
