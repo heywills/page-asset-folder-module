@@ -55,8 +55,6 @@
   <ItemGroup>
     <Compile Include="Generated\Folder.generated.cs" />
     <Compile Include="Generated\FolderProvider.generated.cs" />
-    <Compile Include="Generated\MenuItem.generated.cs" />
-    <Compile Include="Generated\MenuItemProvider.generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AssetFolderRepositoryTests.cs" />
   </ItemGroup>

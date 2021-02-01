@@ -7,6 +7,11 @@ using System;
 using CMS.Tests;
 using CMS.DocumentEngine.Types.CMS;
 using Tests.DocumentEngine;
+using CMS.SiteProvider;
+using System.Data;
+using CMS.Localization;
+using CMS.Membership;
+using CMS.Base;
 
 namespace KenticoCommunity.PageAssetFolders.Tests.Repositories
 {

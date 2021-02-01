@@ -33,16 +33,14 @@ namespace KenticoCommunity.PageAssetFolders.Repositories
                 throw new ArgumentException("parentNode must be a TreeNode", nameof(parentNode));
             }
 
-            var concreteParent = (TreeNode)parentNode;
-            var culture = LocalizationContext.CurrentCulture.CultureCode;
             var childFolder = TreeNode.New(childClassName);
             childFolder.DocumentName = childName;
-            childFolder.DocumentCulture = culture;
+            childFolder.DocumentCulture = parentNode.DocumentCulture;
             if (!string.IsNullOrWhiteSpace(aliasName))
             {
                 childFolder.NodeAlias = aliasName;
             }
-            childFolder.Insert(concreteParent);
+            childFolder.Insert(parentNode);
         }
 
         /// <summary>
