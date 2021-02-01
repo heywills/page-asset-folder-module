@@ -61,8 +61,8 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
         public void EnsureDefaultAssetFolder_RequiresNewContentFolder()
         {
             var treeNodeRepository = _assetFolderRepository;
-            var parentClassName = Folder.CLASS_NAME;
-            var childClassName = MenuItem.CLASS_NAME;
+            var parentClassName = MenuItem.CLASS_NAME;
+            var childClassName = Folder.CLASS_NAME;
             var childDocumentName = "ChildDocumentName";
             var parentNode = TreeNode.New(parentClassName);
             SetGetChildNodesByClassMockReturn(new List<TreeNode>());
@@ -80,8 +80,8 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
         public void EnsureDefaultAssetFolder_ExistingContentFolder()
         {
             var treeNodeRepository = _assetFolderRepository;
-            var parentClassName = Folder.CLASS_NAME;
-            var childClassName = MenuItem.CLASS_NAME;
+            var parentClassName = MenuItem.CLASS_NAME;
+            var childClassName = Folder.CLASS_NAME;
             var childDocumentName = "ChildDocumentName";
             var parentNode = TreeNode.New(parentClassName);
             var childNode = TreeNode.New(childClassName);
@@ -101,8 +101,8 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
         {
             var treeNodeRepository = _assetFolderRepository;
             var eventLoggingHelper = _eventLogService;
-            var parentClassName = Folder.CLASS_NAME;
-            var childClassName = MenuItem.CLASS_NAME;
+            var parentClassName = MenuItem.CLASS_NAME;
+            var childClassName = Folder.CLASS_NAME;
             var childDocumentName = "ChildDocumentName";
             var parentNode = TreeNode.New(parentClassName);
             var childNode = TreeNode.New(childClassName);
@@ -124,8 +124,8 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
         [Test]
         public void AssetFolderAlreadyExists_True()
         {
-            var parentClassName = Folder.CLASS_NAME;
-            var childClassName = MenuItem.CLASS_NAME;
+            var parentClassName = MenuItem.CLASS_NAME;
+            var childClassName = Folder.CLASS_NAME;
             var parentNode = TreeNode.New(parentClassName);
             var childNode = TreeNode.New(childClassName);
             var existingChild = TreeNode.New(childClassName);
@@ -142,8 +142,8 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
         [Test]
         public void AssetFolderAlreadyExists_False()
         {
-            var parentClassName = Folder.CLASS_NAME;
-            var childClassName = MenuItem.CLASS_NAME;
+            var parentClassName = MenuItem.CLASS_NAME;
+            var childClassName = Folder.CLASS_NAME;
             var parentNode = TreeNode.New(parentClassName);
             var childNode = TreeNode.New(childClassName);
 
@@ -156,7 +156,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
         [Test]
         public void AssetFolderAlreadyExists_NewChildNodeNullCheck()
         {
-            var parentNode = TreeNode.New(Folder.CLASS_NAME);
+            var parentNode = TreeNode.New(MenuItem.CLASS_NAME);
             Assert.Throws<ArgumentNullException>(delegate
             {
                 _assetFolderService.AssetFolderAlreadyExists(parentNode, null);
@@ -188,7 +188,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
         TestCase("className", null)]
         public void EnsureDefaultAssetFolder_StringNullCheck(string className, string childName)
         {
-            var parentNode = TreeNode.New(Folder.CLASS_NAME);
+            var parentNode = TreeNode.New(MenuItem.CLASS_NAME);
             Assert.Throws<ArgumentNullException>(delegate
             {
                 _assetFolderService.EnsureDefaultAssetFolder(parentNode, className, childName);
@@ -199,7 +199,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
          TestCase("className", "")]
         public void EnsureDefaultAssetFolder_StringEmptyCheck(string className, string childName)
         {
-            var parentNode = TreeNode.New(Folder.CLASS_NAME);
+            var parentNode = TreeNode.New(MenuItem.CLASS_NAME);
             Assert.Throws<ArgumentException>(delegate
             {
                 _assetFolderService.EnsureDefaultAssetFolder(parentNode, className, childName);
@@ -214,8 +214,8 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
         {
             var treeNodeRepository = _assetFolderRepository;
             var eventLoggingHelper = _eventLogService;
-            var parentClassName = Folder.CLASS_NAME;
-            var childClassName = MenuItem.CLASS_NAME;
+            var parentClassName = MenuItem.CLASS_NAME;
+            var childClassName = Folder.CLASS_NAME;
             var childDocumentName = "ChildDocumentName";
             var parentNode = TreeNode.New(parentClassName);
 
