@@ -57,12 +57,21 @@
     <Compile Include="Generated\FolderProvider.generated.cs" />
     <Compile Include="Generated\MenuItem.generated.cs" />
     <Compile Include="Generated\MenuItemProvider.generated.cs" />
+    <Compile Include="Helpers\ConfigurationHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AssetFolderRepositoryTests.cs" />
     <Compile Include="Services\AssetFolderServiceTests.cs" />
+    <Compile Include="TestHelpers\ConfigFileName.cs" />
+    <Compile Include="TestHelpers\PathHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ConfigFiles\web.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ConfigFiles\correct.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Kentico.Libraries.Tests">
@@ -83,8 +92,6 @@
       <Name>PageAssetFolders</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TestHelpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

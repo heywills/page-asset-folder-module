@@ -54,8 +54,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\AssetFolderRegistrationElement.cs" />
+    <Compile Include="Configurations\AssetFolderRegistrationElementCollection.cs" />
+    <Compile Include="Configurations\DefaultAssetFoldersSection.cs" />
     <Compile Include="Factories\ConfiguredAssetFolderRegistrationListFactory.cs" />
+    <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Interfaces\IAssetFolderRegistrationListFactory.cs" />
+    <Compile Include="Interfaces\IConfigurationHelper.cs" />
     <Compile Include="Models\AssetFolderRegistration.cs" />
     <Compile Include="Services\AssetFolderService.cs" />
     <Compile Include="Helpers\Guard.cs" />
