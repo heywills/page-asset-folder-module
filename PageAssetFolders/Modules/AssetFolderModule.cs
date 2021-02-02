@@ -3,6 +3,7 @@ using CMS.Core;
 using CMS.DataEngine;
 using CMS.DocumentEngine;
 using KenticoCommunity.PageAssetFolders.Factories;
+using KenticoCommunity.PageAssetFolders.Helpers;
 using KenticoCommunity.PageAssetFolders.Interfaces;
 using KenticoCommunity.PageAssetFolders.Modules;
 using KenticoCommunity.PageAssetFolders.Repositories;
@@ -38,14 +39,23 @@ namespace KenticoCommunity.PageAssetFolders.Modules
         {
         }
 
+        /// <summary>
+        /// Register the types required by this module.
+        /// </summary>
+        /// <remarks>
+        /// Developers are allowed to register their own IAssetFolderRegistrationListFactory, so
+        /// this code checks if one is already registered.
+        /// </remarks>
         protected override void OnPreInit()
         {
             base.OnPreInit();
-            // Registered required types
             Service.Use<IAssetFolderService, AssetFolderService>();
             Service.Use<IAssetFolderRepository, AssetFolderRepository>();
-            Service.Use<IAssetFolderRegistrationListFactory, ConfiguredAssetFolderRegistrationListFactory>();
-            Service.Use<IConfigurationHelper, IConfigurationHelper>();
+            Service.Use<IConfigurationHelper, ConfigurationHelper>();
+            if (!Service.IsRegistered(typeof(IAssetFolderRegistrationListFactory)))
+            {
+                Service.Use<IAssetFolderRegistrationListFactory, ConfiguredAssetFolderRegistrationListFactory>();
+            }
         }
 
         /// <summary>

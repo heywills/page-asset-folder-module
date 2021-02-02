@@ -47,7 +47,7 @@ namespace KenticoCommunity.PageAssetFolders.Services
 
         private AssetFolderRegistration GetRegistrationByParentClass(string parentClassName)
         {
-            return _registeredAssetFolderTypes.FirstOrDefault(r => r.ParentClass == parentClassName);
+            return _registeredAssetFolderTypes.FirstOrDefault(r => r.ParentClass.Equals(parentClassName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
