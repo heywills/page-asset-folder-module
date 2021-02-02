@@ -41,7 +41,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
                     {
                         ParentClass = Folder.CLASS_NAME,
                         ChildClass = Folder.CLASS_NAME,
-                        ChildName = "ChildDocumentName"
+                        DefaultName = "ChildDocumentName"
                     }
                 });
             DocumentGenerator.RegisterDocumentType<Folder>(Folder.CLASS_NAME);

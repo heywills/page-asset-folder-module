@@ -45,6 +45,7 @@ namespace KenticoCommunity.PageAssetFolders.Modules
             Service.Use<IAssetFolderService, AssetFolderService>();
             Service.Use<IAssetFolderRepository, AssetFolderRepository>();
             Service.Use<IAssetFolderRegistrationListFactory, ConfiguredAssetFolderRegistrationListFactory>();
+            Service.Use<IConfigurationHelper, IConfigurationHelper>();
         }
 
         /// <summary>

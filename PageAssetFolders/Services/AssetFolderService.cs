@@ -41,7 +41,7 @@ namespace KenticoCommunity.PageAssetFolders.Services
             var registration = GetRegistrationByParentClass(parentNode.ClassName);
             if (registration != null)
             {
-                EnsureDefaultAssetFolder(parentNode, registration.ChildClass, registration.ChildName);
+                EnsureDefaultAssetFolder(parentNode, registration.ChildClass, registration.DefaultName);
             }
         }
 

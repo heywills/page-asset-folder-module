@@ -16,6 +16,6 @@
         /// <summary>
         /// The name to use when creating new asset folders.
         /// </summary>
-        public string ChildName { get; set; }
+        public string DefaultName { get; set; }
     }
 }
