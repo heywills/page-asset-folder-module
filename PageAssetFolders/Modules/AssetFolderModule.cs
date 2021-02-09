@@ -52,7 +52,7 @@ namespace KenticoCommunity.PageAssetFolders.Modules
             Service.Use<IAssetFolderService, AssetFolderService>();
             Service.Use<IAssetFolderRepository, AssetFolderRepository>();
             Service.Use<IConfigurationHelper, ConfigurationHelper>();
-            if (!Service.IsRegistered(typeof(IAssetFolderRegistrationListFactory)))
+            if (!RegistrationHelper.IsRegistered<IAssetFolderRegistrationListFactory>())
             {
                 Service.Use<IAssetFolderRegistrationListFactory, ConfiguredAssetFolderRegistrationListFactory>();
             }
