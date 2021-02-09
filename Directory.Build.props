@@ -6,7 +6,7 @@
     <Copyright>Copyright © $([System.DateTime]::Now.Year)</Copyright>
     <Trademark></Trademark>
     <Product>$(Title)</Product>
-    <VersionPrefix>12.0.0.0</VersionPrefix>
+    <VersionPrefix>13.0.0.0</VersionPrefix>
     <Description>
       Improve content authoring with this Kentico Xperience module. It allows providing automatic content asset folders for pages in the Xperience content tree.
     </Description>
