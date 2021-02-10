@@ -31,8 +31,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
             _assetFolderRepository.Setup(x => x.CreateTransactionScope())
                 .Returns((new Mock<ITransactionScope>()).Object);
 
-            _eventLogService.Setup(x => x.LogException(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Exception>(), null));
-            _eventLogService.Setup(x => x.LogEvent(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+            _eventLogService.Setup(x => x.LogEvent(It.IsAny<EventLogData>()));
 
             _assetFolderRegistrationListFactory.Setup(x => x.GetAssetFolderRegistrations())
                 .Returns(new List<Models.AssetFolderRegistration>()
@@ -112,7 +111,7 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
             _assetFolderService.EnsureDefaultAssetFolder(parentNode, childClassName, childDocumentName);
 
             treeNodeRepository.Verify((m => m.AddChildNode(parentNode, childClassName, childDocumentName, null)), Times.Never);
-            eventLoggingHelper.Verify(m => m.LogEvent("W", nameof(AssetFolderService), "TooManyAssetFolders", It.IsAny<string>()),
+            eventLoggingHelper.Verify(m => m.LogEvent(It.IsAny<EventLogData>()),
                                       Times.Once);
         }
 
@@ -227,7 +226,8 @@ namespace KenticoCommunity.PageAssetFolders.Tests.Services
             _assetFolderService.EnsureDefaultAssetFolder(parentNode, childClassName, childDocumentName);
 
             treeNodeRepository.Verify((m => m.AddChildNode(parentNode, childClassName, childDocumentName, null)), Times.Never);
-            eventLoggingHelper.Verify(m => m.LogException(nameof(AssetFolderService), nameof(_assetFolderService.EnsureDefaultAssetFolder), It.IsAny<IOException>(), null), Times.Once);
+            eventLoggingHelper.Verify(m => m.LogEvent(It.IsAny<EventLogData>()),
+                                      Times.Once);
         }
 
         /// <summary>

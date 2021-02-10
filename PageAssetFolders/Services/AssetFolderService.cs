@@ -91,8 +91,7 @@ namespace KenticoCommunity.PageAssetFolders.Services
                     }
                     else
                     {
-                        _eventLogService.LogEvent("W",
-                                                  nameof(AssetFolderService), 
+                        _eventLogService.LogWarning(nameof(AssetFolderService),
                                                   "TooManyAssetFolders",
                                                   $"The page '{parentNode.NodeAliasPath}' should only contain one folder of type '{childClassName}'.)");
                     }
