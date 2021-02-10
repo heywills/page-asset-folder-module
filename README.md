@@ -9,11 +9,11 @@ This solution uses Xperience's global events to automatically create asset folde
 ## Compatibility
 * .NET 4.6.1 or higher
 * Kentico Xperience versions
-  - 12.0.29 or higher (use KenticoCommunity.UpsertAlternativeForms 12.0.0)
-  - 13.0.0 or higher (use KenticoCommunity.UpsertAlternativeForms 13.0.0)
+  - 12.0.29 or higher (use KenticoCommunity.PageAssetFolders 12.0.0)
+  - 13.0.0 or higher (use KenticoCommunity.PageAssetFolders 13.0.0)
 
 ## Installation
-To install, add the NuGet package, "KenticoCommunity.KenticoCommunity.PageAssetFolders", to your CMS project and then add the web.config sections described below.
+To install, add the NuGet package, "KenticoCommunity.PageAssetFolders", to your CMS project and then add the web.config sections described below.
 
 ## Usage
 After adding the NuGet package to your CMS project, the Page Asset Folder module is installed. It will look for a web.config section to determine what default folders to create. 
