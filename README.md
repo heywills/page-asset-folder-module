@@ -74,6 +74,14 @@ namespace CMSApp.Acme.Factories
 }
 ```
 
+## Avoiding Staging Conflicts
+IMPORTANT: Global system events fire when pages are created through the Xperience Staging module. This will cause the custom module to create the page asset folder, even though the same folder would be staged from the source environment. The end result would be staging conflicts, because the module created an asset folder in the destination environment that conflicts with the one coming from the source environment. 
+
+To prevent this, add the following appSetting key to the web.config. This setting will prevent events from DocumentEvents class from being raised when processing staging tasks.
+
+```
+<add key="CMSStagingUseTreeCustomHandlers" value="false" />
+```
 ## License
 
 This project uses a standard MIT license which can be found [here](https://github.com/heywills/page-asset-folder-module/master/LICENSE).
