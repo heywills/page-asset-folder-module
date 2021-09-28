@@ -9,6 +9,7 @@ using KenticoCommunity.PageAssetFolders.Modules;
 using KenticoCommunity.PageAssetFolders.Repositories;
 using KenticoCommunity.PageAssetFolders.Services;
 using System;
+using System.Web;
 
 [assembly: RegisterModule(typeof(AssetFolderModule))]
 
@@ -79,6 +80,10 @@ namespace KenticoCommunity.PageAssetFolders.Modules
         /// <param name="e"></param>
         private void DocumentInsertAfter(object sender, DocumentEventArgs e)
         {
+            if(!TriggeredBySingleNewPageInteraction())
+            {
+                return;
+            }
             var page = e.Node;
             if (page != null)
             {
@@ -132,5 +137,33 @@ namespace KenticoCommunity.PageAssetFolders.Modules
             }
         }
 
+        /// <summary>
+        /// Return true if the event is occuring because the user is creating a single
+        /// new page in the Pages module.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>This is a hack to determine if a document event is being fired because of
+        /// a single page being created in the Pages moduel vs a page being created during
+        /// a bulk copy. Xperience doesn't provide the state information needed to determine this
+        /// otherwise.
+        /// If you copy a subtree of nodes that includes the automatically created nodes, the
+        /// document events will fire again and recreate the items. This is because a document
+        /// event may be fired for the parent node, before the child node is copied. When the code
+        /// is running, the parent has no children, so it creates a new default child.  The only way
+        /// to avoid this, is to detect if their is a bulk copy operation in progress. 
+        /// </remarks>
+        private bool TriggeredBySingleNewPageInteraction()
+        {
+            if (HttpContext.Current != null)
+            {
+                var absolutePath = HttpContext.Current.Request.Url.AbsolutePath;
+                if (absolutePath.EndsWith("NewPage.aspx", StringComparison.OrdinalIgnoreCase)
+                    || absolutePath.EndsWith("Edit.aspx", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
